@@ -1,9 +1,14 @@
 import { HttpTypes } from "@medusajs/types"
+import createMiddleware from "next-intl/middleware"
 import { NextRequest, NextResponse } from "next/server"
+import { routing } from "./i18n/routing"
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL
 const PUBLISHABLE_API_KEY = process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY
 const DEFAULT_REGION = process.env.NEXT_PUBLIC_DEFAULT_REGION || "dk"
+
+// Handles the [locale] segment: negotiation, prefixing, and the NEXT_LOCALE cookie.
+const intlMiddleware = createMiddleware(routing)
 
 const regionMapCache = {
   regionMap: new Map<string, HttpTypes.StoreRegion>(),
@@ -23,7 +28,6 @@ async function getRegionMap(cacheId: string) {
     !regionMap.keys().next().value ||
     regionMapUpdated < Date.now() - 3600 * 1000
   ) {
-    // Fetch regions from Medusa. We can't use the JS client here because middleware is running on Edge and the client needs a Node environment.
     const response = await fetch(`${BACKEND_URL}/store/regions`, {
       method: "GET",
       headers: {
@@ -40,15 +44,12 @@ async function getRegionMap(cacheId: string) {
       throw new Error(`Backend returned ${response.status}`)
     }
 
-    const json = await response.json()
-
-    const { regions } = json
+    const { regions } = await response.json()
 
     if (!regions?.length) {
       return new Map<string, HttpTypes.StoreRegion>()
     }
 
-    // Create a map of country codes to regions.
     regions.forEach((region: HttpTypes.StoreRegion) => {
       region.countries?.forEach((c) => {
         regionMapCache.regionMap.set(c.iso_2 ?? "", region)
@@ -62,76 +63,77 @@ async function getRegionMap(cacheId: string) {
 }
 
 /**
- * Fetches regions from Medusa and sets the region cookie.
- * @param request
- * @param response
+ * Resolve the best country code. URL country is at segment index 2 now
+ * (after the [locale] segment): /{locale}/{country}/...
  */
-async function getCountryCode(
+function getCountryCode(
   request: NextRequest,
-  regionMap: Map<string, HttpTypes.StoreRegion | number>
+  regionMap: Map<string, HttpTypes.StoreRegion>
 ) {
-  let countryCode
-
-  const urlCountryCode = request.nextUrl.pathname.split("/")[1]?.toLowerCase()
-
-  // Cloudflare Workers provides country via request.cf.country
-  const cloudflareCountryCode = (request as { cf?: { country?: string } }).cf?.country?.toLowerCase()
-
-  // Vercel provides x-vercel-ip-country header
+  const urlCountryCode = request.nextUrl.pathname.split("/")[2]?.toLowerCase()
+  const cloudflareCountryCode = (
+    request as { cf?: { country?: string } }
+  ).cf?.country?.toLowerCase()
   const vercelCountryCode = request.headers
     .get("x-vercel-ip-country")
     ?.toLowerCase()
 
-  if (urlCountryCode && regionMap.has(urlCountryCode)) {
-    countryCode = urlCountryCode
-  } else if (cloudflareCountryCode && regionMap.has(cloudflareCountryCode)) {
-    countryCode = cloudflareCountryCode
-  } else if (vercelCountryCode && regionMap.has(vercelCountryCode)) {
-    countryCode = vercelCountryCode
-  } else if (regionMap.has(DEFAULT_REGION)) {
-    countryCode = DEFAULT_REGION
-  } else if (regionMap.keys().next().value) {
-    countryCode = regionMap.keys().next().value
-  }
-
-  return countryCode
+  if (urlCountryCode && regionMap.has(urlCountryCode)) return urlCountryCode
+  if (cloudflareCountryCode && regionMap.has(cloudflareCountryCode))
+    return cloudflareCountryCode
+  if (vercelCountryCode && regionMap.has(vercelCountryCode))
+    return vercelCountryCode
+  if (regionMap.has(DEFAULT_REGION)) return DEFAULT_REGION
+  return regionMap.keys().next().value as string | undefined
 }
 
 /**
- * Middleware to handle region selection and onboarding status.
+ * Composed middleware: next-intl handles the [locale] prefix; we then ensure a
+ * valid [countryCode] segment follows it, producing /{locale}/{country}/...
  */
 export async function middleware(request: NextRequest) {
-  if (request.nextUrl.pathname.includes(".")) {
+  const { pathname, search, origin } = request.nextUrl
+
+  if (pathname.includes(".")) {
     return NextResponse.next()
   }
 
+  const segments = pathname.split("/")
+  const maybeLocale = segments[1]?.toLowerCase()
+  const matchedLocale = routing.locales.find(
+    (l) => l.toLowerCase() === maybeLocale
+  )
+
+  // 1. No valid locale prefix → let next-intl negotiate & prepend it.
+  //    (A follow-up request then gains the country segment below.)
+  if (!matchedLocale) {
+    return intlMiddleware(request)
+  }
+
+  // 2. Locale present → ensure a valid country segment follows it.
   const cacheIdCookie = request.cookies.get("_medusa_cache_id")
   const cacheId = cacheIdCookie?.value || crypto.randomUUID()
-
   const regionMap = await getRegionMap(cacheId)
-  const countryCode = await getCountryCode(request, regionMap)
 
-  // if the country code is available, use it, otherwise use the default region
-  const country = countryCode || DEFAULT_REGION
-  const firstPathSegment = request.nextUrl.pathname.split("/")[1]?.toLowerCase()
-  const urlHasCountry = firstPathSegment === country.toLowerCase()
+  const urlCountry = segments[2]?.toLowerCase()
+  const hasValidCountry = !!urlCountry && regionMap.has(urlCountry)
 
-  if (urlHasCountry) {
+  if (hasValidCountry) {
+    // Let next-intl set its locale cookie/headers, then attach our cache cookie.
+    const response = intlMiddleware(request)
     if (!cacheIdCookie) {
-      const response = NextResponse.next()
       response.cookies.set("_medusa_cache_id", cacheId, {
         maxAge: 60 * 60 * 24,
       })
-      return response
     }
-    return NextResponse.next()
+    return response
   }
 
-  // if the url doesn't have the country, redirect to it
-  const redirectPath =
-    request.nextUrl.pathname === "/" ? "" : request.nextUrl.pathname
-  const queryString = request.nextUrl.search || ""
-  const redirectUrl = `${request.nextUrl.origin}/${country}${redirectPath}${queryString}`
+  // 3. Locale present but country missing/invalid → redirect inserting country.
+  const country = getCountryCode(request, regionMap) || DEFAULT_REGION
+  const rest = segments.slice(2).join("/")
+  const restPath = rest ? `/${rest}` : ""
+  const redirectUrl = `${origin}/${matchedLocale}/${country}${restPath}${search}`
 
   return NextResponse.redirect(redirectUrl, 307)
 }
