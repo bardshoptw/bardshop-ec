@@ -62,5 +62,11 @@
     "sending": "Sending...",
     "success": "Thank you! Your message has been sent.",
     "error": "Submission failed, please try again"
+  },
+  "Chat": {
+    "title": "Chat with us",
+    "greeting": "Hi! How can we help you today?",
+    "placeholder": "Type a message…",
+    "send": "Send"
   }
 }
