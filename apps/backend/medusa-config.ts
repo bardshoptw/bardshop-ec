@@ -53,6 +53,10 @@ module.exports = defineConfig({
       resolve: "./src/modules/forms",
     },
     {
+      // Simple support chat (conversations + messages)
+      resolve: "./src/modules/chat",
+    },
+    {
       // Auth module: keep emailpass (admin + email/password customers) and
       // enable third-party providers only when their credentials are present,
       // so the backend still boots before credentials are supplied.
