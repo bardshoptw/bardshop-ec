@@ -56,5 +56,11 @@
     "shippingMethod": "배송 방법",
     "payment": "결제",
     "continueToPayment": "결제 계속"
+  },
+  "Form": {
+    "submit": "보내기",
+    "sending": "보내는 중…",
+    "success": "메시지가 전송되었습니다. 감사합니다!",
+    "error": "전송에 실패했습니다. 다시 시도해 주세요"
   }
 }

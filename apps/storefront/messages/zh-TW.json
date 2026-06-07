@@ -56,5 +56,11 @@
     "shippingMethod": "運送方式",
     "payment": "付款",
     "continueToPayment": "繼續付款"
+  },
+  "Form": {
+    "submit": "送出",
+    "sending": "送出中…",
+    "success": "已送出，感謝您的留言！我們會盡快回覆。",
+    "error": "送出失敗，請稍後再試"
   }
 }

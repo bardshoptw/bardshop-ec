@@ -56,5 +56,11 @@
     "shippingMethod": "Shipping method",
     "payment": "Payment",
     "continueToPayment": "Continue to payment"
+  },
+  "Form": {
+    "submit": "Submit",
+    "sending": "Sending...",
+    "success": "Thank you! Your message has been sent.",
+    "error": "Submission failed, please try again"
   }
 }
