@@ -1,0 +1,60 @@
+{
+  "Nav": {
+    "store": "商店",
+    "account": "會員",
+    "cart": "購物車",
+    "search": "搜尋"
+  },
+  "General": {
+    "home": "首頁",
+    "menu": "選單",
+    "language": "語言",
+    "shippingTo": "運送至：",
+    "edit": "編輯",
+    "continue": "繼續",
+    "loading": "載入中…",
+    "viewOnGithub": "在 GitHub 上查看"
+  },
+  "Hero": {
+    "title": "電商起始範本",
+    "subtitle": "由 Medusa 與 Next.js 提供支援"
+  },
+  "Product": {
+    "addToCart": "加入購物車",
+    "outOfStock": "缺貨",
+    "selectVariant": "選擇規格"
+  },
+  "Cart": {
+    "title": "購物車",
+    "empty": "您的購物車是空的",
+    "emptyText": "您的購物車目前是空的。透過下方連結開始瀏覽我們的商品吧。",
+    "exploreProducts": "探索商品",
+    "summary": "摘要",
+    "goToCheckout": "前往結帳"
+  },
+  "Store": {
+    "allProducts": "所有商品",
+    "sortBy": "排序方式",
+    "latestArrivals": "最新上架",
+    "priceAsc": "價格：由低到高",
+    "priceDesc": "價格：由高到低"
+  },
+  "Footer": {
+    "categories": "商品分類",
+    "collections": "系列"
+  },
+  "Account": {
+    "hello": "您好，{name}",
+    "profile": "個人資料",
+    "addresses": "地址",
+    "orders": "訂單",
+    "recentOrders": "近期訂單",
+    "noRecentOrders": "沒有近期訂單"
+  },
+  "Checkout": {
+    "delivery": "配送",
+    "shippingMethod": "運送方式",
+    "payment": "付款",
+    "continueToPayment": "繼續付款"
+  }
+}

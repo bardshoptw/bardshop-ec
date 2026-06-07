@@ -1,0 +1,60 @@
+{
+  "Nav": {
+    "store": "ストア",
+    "account": "アカウント",
+    "cart": "カート",
+    "search": "検索"
+  },
+  "General": {
+    "home": "ホーム",
+    "menu": "メニュー",
+    "language": "言語",
+    "shippingTo": "お届け先：",
+    "edit": "編集",
+    "continue": "続ける",
+    "loading": "読み込み中…",
+    "viewOnGithub": "GitHubで見る"
+  },
+  "Hero": {
+    "title": "Eコマース スターターテンプレート",
+    "subtitle": "Medusa と Next.js を使用"
+  },
+  "Product": {
+    "addToCart": "カートに追加",
+    "outOfStock": "在庫切れ",
+    "selectVariant": "バリエーションを選択"
+  },
+  "Cart": {
+    "title": "カート",
+    "empty": "カートに商品がありません",
+    "emptyText": "カートには何も入っていません。下のリンクから商品をご覧ください。",
+    "exploreProducts": "商品を見る",
+    "summary": "概要",
+    "goToCheckout": "レジに進む"
+  },
+  "Store": {
+    "allProducts": "すべての商品",
+    "sortBy": "並び替え",
+    "latestArrivals": "新着順",
+    "priceAsc": "価格：安い順",
+    "priceDesc": "価格：高い順"
+  },
+  "Footer": {
+    "categories": "カテゴリー",
+    "collections": "コレクション"
+  },
+  "Account": {
+    "hello": "こんにちは、{name}さん",
+    "profile": "プロフィール",
+    "addresses": "住所",
+    "orders": "注文",
+    "recentOrders": "最近の注文",
+    "noRecentOrders": "最近の注文はありません"
+  },
+  "Checkout": {
+    "delivery": "配送",
+    "shippingMethod": "配送方法",
+    "payment": "お支払い",
+    "continueToPayment": "支払いに進む"
+  }
+}

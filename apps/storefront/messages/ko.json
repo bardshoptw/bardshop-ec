@@ -1,0 +1,60 @@
+{
+  "Nav": {
+    "store": "스토어",
+    "account": "계정",
+    "cart": "장바구니",
+    "search": "검색"
+  },
+  "General": {
+    "home": "홈",
+    "menu": "메뉴",
+    "language": "언어",
+    "shippingTo": "배송지:",
+    "edit": "편집",
+    "continue": "계속",
+    "loading": "불러오는 중…",
+    "viewOnGithub": "GitHub에서 보기"
+  },
+  "Hero": {
+    "title": "이커머스 스타터 템플릿",
+    "subtitle": "Medusa와 Next.js 기반"
+  },
+  "Product": {
+    "addToCart": "장바구니에 담기",
+    "outOfStock": "품절",
+    "selectVariant": "옵션 선택"
+  },
+  "Cart": {
+    "title": "장바구니",
+    "empty": "장바구니가 비어 있습니다",
+    "emptyText": "장바구니에 담긴 상품이 없습니다. 아래 링크에서 상품을 둘러보세요.",
+    "exploreProducts": "상품 둘러보기",
+    "summary": "요약",
+    "goToCheckout": "결제하기"
+  },
+  "Store": {
+    "allProducts": "전체 상품",
+    "sortBy": "정렬",
+    "latestArrivals": "최신순",
+    "priceAsc": "가격: 낮은순",
+    "priceDesc": "가격: 높은순"
+  },
+  "Footer": {
+    "categories": "카테고리",
+    "collections": "컬렉션"
+  },
+  "Account": {
+    "hello": "안녕하세요, {name}님",
+    "profile": "프로필",
+    "addresses": "주소",
+    "orders": "주문",
+    "recentOrders": "최근 주문",
+    "noRecentOrders": "최근 주문이 없습니다"
+  },
+  "Checkout": {
+    "delivery": "배송",
+    "shippingMethod": "배송 방법",
+    "payment": "결제",
+    "continueToPayment": "결제 계속"
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "Nav": {
+    "store": "Store",
+    "account": "Account",
+    "cart": "Cart",
+    "search": "Search"
+  },
+  "General": {
+    "home": "Home",
+    "menu": "Menu",
+    "language": "Language",
+    "shippingTo": "Shipping to:",
+    "edit": "Edit",
+    "continue": "Continue",
+    "loading": "Loading...",
+    "viewOnGithub": "View on GitHub"
+  },
+  "Hero": {
+    "title": "Ecommerce Starter Template",
+    "subtitle": "Powered by Medusa and Next.js"
+  },
+  "Product": {
+    "addToCart": "Add to cart",
+    "outOfStock": "Out of stock",
+    "selectVariant": "Select variant"
+  },
+  "Cart": {
+    "title": "Cart",
+    "empty": "You don't have anything in your cart",
+    "emptyText": "You don't have anything in your cart. Let's change that, use the link below to start browsing our products.",
+    "exploreProducts": "Explore products",
+    "summary": "Summary",
+    "goToCheckout": "Go to checkout"
+  },
+  "Store": {
+    "allProducts": "All products",
+    "sortBy": "Sort by",
+    "latestArrivals": "Latest Arrivals",
+    "priceAsc": "Price: Low -> High",
+    "priceDesc": "Price: High -> Low"
+  },
+  "Footer": {
+    "categories": "Categories",
+    "collections": "Collections"
+  },
+  "Account": {
+    "hello": "Hello {name}",
+    "profile": "Profile",
+    "addresses": "Addresses",
+    "orders": "Orders",
+    "recentOrders": "Recent orders",
+    "noRecentOrders": "No recent orders"
+  },
+  "Checkout": {
+    "delivery": "Delivery",
+    "shippingMethod": "Shipping method",
+    "payment": "Payment",
+    "continueToPayment": "Continue to payment"
+  }
+}

@@ -1,0 +1,26 @@
+# Medusa Store
+
+> A global e-commerce store built on Medusa and Next.js. This file helps AI
+> assistants and answer engines understand the site's structure and find the
+> most useful pages. Replace this description with your brand, value
+> proposition and primary product categories before launch.
+
+## Key pages
+
+- [Store / All products](/dk/store): Browse the full product catalog.
+- [Cart](/dk/cart): Current shopping cart.
+- [Account](/dk/account): Customer account and order history.
+
+## Products
+
+Each product has a detail page at `/{country}/products/{handle}` with
+schema.org Product + Offer JSON-LD (name, description, images, price,
+currency and availability) rendered server-side for accurate AI citation.
+
+## Notes for AI assistants
+
+- Prices and availability are authoritative in the per-product JSON-LD.
+- The store is multi-region; `{country}` in the URL (e.g. `dk`) selects the
+  region and currency.
+- For programmatic access, a public Store API is available via the Medusa
+  backend; contact the store operator for API credentials.
