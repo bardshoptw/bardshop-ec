@@ -47,4 +47,50 @@ module.exports = defineConfig({
       }
     },
   },
+  modules: [
+    {
+      // Auth module: keep emailpass (admin + email/password customers) and
+      // enable third-party providers only when their credentials are present,
+      // so the backend still boots before credentials are supplied.
+      resolve: "@medusajs/medusa/auth",
+      options: {
+        providers: [
+          {
+            resolve: "@medusajs/medusa/auth-emailpass",
+            id: "emailpass",
+          },
+          ...(process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET
+            ? [
+                {
+                  resolve: "@medusajs/medusa/auth-google",
+                  id: "google",
+                  options: {
+                    clientId: process.env.GOOGLE_CLIENT_ID,
+                    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+                    callbackUrl:
+                      process.env.GOOGLE_CALLBACK_URL ||
+                      "http://localhost:9000/auth/customer/google/callback",
+                  },
+                },
+              ]
+            : []),
+          ...(process.env.LINE_CLIENT_ID && process.env.LINE_CLIENT_SECRET
+            ? [
+                {
+                  resolve: "./src/modules/auth-line",
+                  id: "line",
+                  options: {
+                    clientId: process.env.LINE_CLIENT_ID,
+                    clientSecret: process.env.LINE_CLIENT_SECRET,
+                    callbackUrl:
+                      process.env.LINE_CALLBACK_URL ||
+                      "http://localhost:9000/auth/customer/line/callback",
+                  },
+                },
+              ]
+            : []),
+        ],
+      },
+    },
+  ],
 })
