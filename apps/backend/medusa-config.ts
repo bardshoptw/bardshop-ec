@@ -49,6 +49,10 @@ module.exports = defineConfig({
   },
   modules: [
     {
+      // Custom forms (admin-defined contact/lead forms + submissions inbox)
+      resolve: "./src/modules/forms",
+    },
+    {
       // Auth module: keep emailpass (admin + email/password customers) and
       // enable third-party providers only when their credentials are present,
       // so the backend still boots before credentials are supplied.
