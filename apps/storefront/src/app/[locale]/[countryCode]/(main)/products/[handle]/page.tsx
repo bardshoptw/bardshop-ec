@@ -2,11 +2,13 @@ import { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { listProducts } from "@lib/data/products"
 import { getRegion, listRegions } from "@lib/data/regions"
+import { getBaseURL } from "@lib/util/env"
+import { routing } from "../../../../../../i18n/routing"
 import ProductTemplate from "@modules/products/templates"
 import { HttpTypes } from "@medusajs/types"
 
 type Props = {
-  params: Promise<{ countryCode: string; handle: string }>
+  params: Promise<{ locale: string; countryCode: string; handle: string }>
   searchParams: Promise<{ v_id?: string }>
 }
 
@@ -87,9 +89,20 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     notFound()
   }
 
+  const baseUrl = getBaseURL()
+  const productPath = (locale: string) =>
+    `${baseUrl}/${locale}/${params.countryCode}/products/${handle}`
+  const languages = Object.fromEntries(
+    routing.locales.map((l) => [l, productPath(l)])
+  )
+
   return {
     title: `${product.title} | Medusa Store`,
     description: `${product.title}`,
+    alternates: {
+      canonical: productPath(params.locale),
+      languages,
+    },
     openGraph: {
       title: `${product.title} | Medusa Store`,
       description: `${product.title}`,

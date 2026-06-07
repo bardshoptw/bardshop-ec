@@ -2,6 +2,7 @@
 
 import { Popover, PopoverPanel, Transition } from "@headlessui/react"
 import useToggleState from "@lib/hooks/use-toggle-state"
+import { useTranslations } from "next-intl"
 import { ArrowRightMini, XMark } from "@medusajs/icons"
 import { HttpTypes } from "@medusajs/types"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
@@ -9,6 +10,7 @@ import { Text, clx } from "@modules/common/components/ui"
 import { Fragment } from "react"
 import CountrySelect from "../country-select"
 import LanguageSelect from "../language-select"
+import LocaleSwitcher from "../locale-switcher"
 import { Locale } from "@lib/data/locales"
 
 
@@ -28,6 +30,14 @@ type SideMenuProps = {
 const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
   const countryToggleState = useToggleState()
   const languageToggleState = useToggleState()
+  const t = useTranslations()
+
+  const menuItemLabels: Record<string, string> = {
+    Home: t("General.home"),
+    Store: t("Nav.store"),
+    Account: t("Nav.account"),
+    Cart: t("Nav.cart"),
+  }
 
   return (
     <div className="h-full">
@@ -40,7 +50,7 @@ const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
                   data-testid="nav-menu-button"
                   className="relative h-full flex items-center transition-all ease-out duration-200 focus:outline-none hover:text-ui-fg-base"
                 >
-                  Menu
+                  {t("General.menu")}
                 </Popover.Button>
               </div>
 
@@ -82,13 +92,16 @@ const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
                               onClick={close}
                               data-testid={`${name.toLowerCase()}-link`}
                             >
-                              {name}
+                              {menuItemLabels[name] ?? name}
                             </LocalizedClientLink>
                           </li>
                         )
                       })}
                     </ul>
                     <div className="flex flex-col gap-y-6">
+                      <div className="flex justify-between">
+                        <LocaleSwitcher />
+                      </div>
                       {!!locales?.length && (
                         <div
                           className="flex justify-between"
