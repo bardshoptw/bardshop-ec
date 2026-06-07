@@ -46,6 +46,7 @@
 | Git 版控 + GitHub 遠端 | ✅ |
 | 資深工程師（架構負責人） | ⬜ 待你補人 |
 | 托管/部署決策（Medusa Cloud vs 自管、網域） | ⬜ |
+| **正式 DB 選型**（dev 續用 Supabase；上線二選一 **Neon vs AWS Aurora**） | ⬜ 待部署時定案（見 `docs/database-decision.md`，不綁死、可隨時換） |
 
 ### Phase 1：自家品牌全球電商
 | 項目 | 狀態 |
