@@ -68,5 +68,21 @@
     "greeting": "您好！有什麼可以為您服務的嗎？",
     "placeholder": "輸入訊息…",
     "send": "送出"
+  },
+  "Studio": {
+    "title": "AI 影像工作室",
+    "balance": "點數餘額",
+    "credits": "點",
+    "generate": "AI 生圖",
+    "removeBg": "去背",
+    "promptPlaceholder": "描述你想要的圖…",
+    "imageUrlPlaceholder": "圖片網址…",
+    "cost": "消耗 {cost} 點",
+    "runBtn": "開始",
+    "running": "處理中…",
+    "insufficient": "點數不足，請先儲值。",
+    "myAssets": "我的素材",
+    "noAssets": "尚無素材，試著生成一張吧！",
+    "loginRequired": "請先登入會員才能使用 AI 工作室。"
   }
 }

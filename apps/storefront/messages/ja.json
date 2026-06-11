@@ -68,5 +68,21 @@
     "greeting": "こんにちは！ご用件をお伺いします。",
     "placeholder": "メッセージを入力…",
     "send": "送信"
+  },
+  "Studio": {
+    "title": "AI画像スタジオ",
+    "balance": "クレジット残高",
+    "credits": "クレジット",
+    "generate": "画像生成",
+    "removeBg": "背景除去",
+    "promptPlaceholder": "生成したい画像を入力…",
+    "imageUrlPlaceholder": "画像URL…",
+    "cost": "{cost} クレジット消費",
+    "runBtn": "実行",
+    "running": "処理中…",
+    "insufficient": "クレジットが不足しています。チャージしてください。",
+    "myAssets": "マイ素材",
+    "noAssets": "まだ素材がありません。生成してみましょう！",
+    "loginRequired": "AIスタジオを使うにはログインしてください。"
   }
 }

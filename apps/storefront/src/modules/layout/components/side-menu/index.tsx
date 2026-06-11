@@ -17,6 +17,7 @@ import { Locale } from "@lib/data/locales"
 const SideMenuItems = {
   Home: "/",
   Store: "/store",
+  Studio: "/studio",
   Account: "/account",
   Cart: "/cart",
 }
@@ -35,6 +36,7 @@ const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
   const menuItemLabels: Record<string, string> = {
     Home: t("General.home"),
     Store: t("Nav.store"),
+    Studio: t("Studio.title"),
     Account: t("Nav.account"),
     Cart: t("Nav.cart"),
   }

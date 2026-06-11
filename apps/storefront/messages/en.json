@@ -68,5 +68,21 @@
     "greeting": "Hi! How can we help you today?",
     "placeholder": "Type a message…",
     "send": "Send"
+  },
+  "Studio": {
+    "title": "AI Image Studio",
+    "balance": "Credit balance",
+    "credits": "credits",
+    "generate": "Generate",
+    "removeBg": "Remove background",
+    "promptPlaceholder": "Describe the image you want…",
+    "imageUrlPlaceholder": "Image URL…",
+    "cost": "Costs {cost} credits",
+    "runBtn": "Run",
+    "running": "Processing…",
+    "insufficient": "Not enough credits — please top up.",
+    "myAssets": "My assets",
+    "noAssets": "No assets yet — try generating one!",
+    "loginRequired": "Please log in to use the AI Studio."
   }
 }
