@@ -57,6 +57,10 @@ module.exports = defineConfig({
       resolve: "./src/modules/chat",
     },
     {
+      // Credit wallet (top-up + spend ledger) for AI studio usage
+      resolve: "./src/modules/credits",
+    },
+    {
       // Auth module: keep emailpass (admin + email/password customers) and
       // enable third-party providers only when their credentials are present,
       // so the backend still boots before credentials are supplied.
