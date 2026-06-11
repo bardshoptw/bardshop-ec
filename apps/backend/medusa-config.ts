@@ -61,6 +61,10 @@ module.exports = defineConfig({
       resolve: "./src/modules/credits",
     },
     {
+      // AI image studio (jobs + asset library; mock or fal.ai provider)
+      resolve: "./src/modules/ai-studio",
+    },
+    {
       // Auth module: keep emailpass (admin + email/password customers) and
       // enable third-party providers only when their credentials are present,
       // so the backend still boots before credentials are supplied.
