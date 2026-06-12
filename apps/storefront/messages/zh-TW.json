@@ -83,6 +83,9 @@
     "insufficient": "點數不足，請先儲值。",
     "myAssets": "我的素材",
     "noAssets": "尚無素材，試著生成一張吧！",
-    "loginRequired": "請先登入會員才能使用 AI 工作室。"
+    "loginRequired": "請先登入會員才能使用 AI 工作室。",
+    "topup": "儲值",
+    "topupHint": "選擇儲值方案，送出後客服將盡快與您聯繫完成付款與加值（線上付款即將開放）。",
+    "topupSent": "儲值申請已送出！客服將盡快與您聯繫。"
   }
 }

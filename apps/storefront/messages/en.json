@@ -83,6 +83,9 @@
     "insufficient": "Not enough credits — please top up.",
     "myAssets": "My assets",
     "noAssets": "No assets yet — try generating one!",
-    "loginRequired": "Please log in to use the AI Studio."
+    "loginRequired": "Please log in to use the AI Studio.",
+    "topup": "Top up",
+    "topupHint": "Pick a package — our team will contact you to complete payment and credit your account (online payment coming soon).",
+    "topupSent": "Top-up request sent! We'll contact you shortly."
   }
 }

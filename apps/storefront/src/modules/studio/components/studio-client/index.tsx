@@ -4,15 +4,24 @@ import { useState } from "react"
 import { useTranslations } from "next-intl"
 import { Button } from "@modules/common/components/ui"
 import { runAiJob, StudioAsset } from "@lib/data/studio"
+import { submitForm } from "@lib/data/forms"
 
 const COST: Record<string, number> = { generate: 5, bg_remove: 1 }
+
+const TOPUP_PACKAGES = [
+  { credits: 100, price: "NT$100" },
+  { credits: 300, price: "NT$270" },
+  { credits: 1000, price: "NT$800" },
+]
 
 export default function StudioClient({
   initialBalance,
   initialAssets,
+  customerEmail,
 }: {
   initialBalance: number
   initialAssets: StudioAsset[]
+  customerEmail?: string
 }) {
   const t = useTranslations()
   const [balance, setBalance] = useState(initialBalance)
@@ -22,6 +31,10 @@ export default function StudioClient({
   const [imageUrl, setImageUrl] = useState("")
   const [running, setRunning] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [topupOpen, setTopupOpen] = useState(false)
+  const [topupState, setTopupState] = useState<"idle" | "sending" | "sent">(
+    "idle"
+  )
 
   const cost = COST[mode]
   const canRun =
@@ -48,13 +61,63 @@ export default function StudioClient({
 
   return (
     <div className="flex flex-col gap-y-8">
-      {/* Balance */}
-      <div className="flex items-center gap-x-3">
+      {/* Balance + top-up */}
+      <div className="flex items-center gap-x-4 flex-wrap">
         <span className="text-ui-fg-subtle">{t("Studio.balance")}：</span>
         <span className="text-2xl-semi">
           {balance} {t("Studio.credits")}
         </span>
+        <Button
+          variant="secondary"
+          className="h-9"
+          onClick={() => {
+            setTopupOpen((o) => !o)
+            setTopupState("idle")
+          }}
+        >
+          {t("Studio.topup")}
+        </Button>
       </div>
+
+      {/* Top-up panel */}
+      {topupOpen && (
+        <div className="border border-ui-border-base rounded-lg p-6 max-w-2xl flex flex-col gap-y-4">
+          {topupState === "sent" ? (
+            <p className="text-ui-fg-base">{t("Studio.topupSent")}</p>
+          ) : (
+            <>
+              <p className="text-ui-fg-subtle text-small-regular">
+                {t("Studio.topupHint")}
+              </p>
+              <div className="flex gap-x-3 flex-wrap">
+                {TOPUP_PACKAGES.map((p) => (
+                  <button
+                    key={p.credits}
+                    disabled={topupState === "sending"}
+                    onClick={async () => {
+                      setTopupState("sending")
+                      const res = await submitForm("topup", {
+                        email: customerEmail ?? "",
+                        package: p.price,
+                        amount: String(p.credits),
+                      })
+                      setTopupState(res.ok ? "sent" : "idle")
+                    }}
+                    className="border border-ui-border-base rounded-lg px-6 py-4 hover:border-ui-fg-base text-left"
+                  >
+                    <div className="text-xl-semi">
+                      {p.credits} {t("Studio.credits")}
+                    </div>
+                    <div className="text-ui-fg-subtle text-small-regular">
+                      {p.price}
+                    </div>
+                  </button>
+                ))}
+              </div>
+            </>
+          )}
+        </div>
+      )}
 
       {/* Operation panel */}
       <div className="border border-ui-border-base rounded-lg p-6 flex flex-col gap-y-4 max-w-2xl">

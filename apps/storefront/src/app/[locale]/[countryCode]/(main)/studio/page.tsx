@@ -33,7 +33,11 @@ export default async function StudioPage() {
   return (
     <div className="content-container py-12 flex flex-col gap-y-6">
       <h1 className="text-2xl-semi">{t("Studio.title")}</h1>
-      <StudioClient initialBalance={credits.balance} initialAssets={assets} />
+      <StudioClient
+        initialBalance={credits.balance}
+        initialAssets={assets}
+        customerEmail={customer.email ?? undefined}
+      />
     </div>
   )
 }
