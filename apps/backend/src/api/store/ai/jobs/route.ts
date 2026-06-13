@@ -72,10 +72,14 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
   })
 
   try {
-    const { url } = await runAi(type, {
-      prompt: body.prompt,
-      image_url: body.image_url,
-    })
+    const { url } = await runAi(
+      type,
+      {
+        prompt: body.prompt,
+        image_url: body.image_url,
+      },
+      req.scope
+    )
     await ai.updateAiJobs({ id: job.id, status: "completed", output_url: url })
     const asset = await ai.createAssets({
       customer_id: customerId,
