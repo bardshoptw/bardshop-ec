@@ -41,17 +41,36 @@
 - 前台浮動「線上客服」聊天視窗（輪詢、4 語言）
 - 後台「即時客服」收件匣（對話列表 + 回覆）
 
-### 第三方登入（#3 後端就緒）
-- auth 模組：emailpass（保留）+ Google（官方 provider，條件啟用）+ LINE（自寫 provider 插槽）
-- **等憑證**即可啟用
+### 第三方登入（#3）
+- auth 模組：emailpass + **Google（✅ 已填憑證、後端驗證可回傳 Google 授權網址）** + LINE（插槽，等憑證）
+- 前台「使用 Google 登入」按鈕 + OAuth callback（`/oauth/callback/google`）
+- ⚠️ 實際瀏覽器登入還需：Google Console 註冊 redirect URI + 加測試使用者（見對話）
+
+### 資料匯入 / 匯出 API（常態可用）
+- `GET /admin/export/:resource`（products/customers/orders，CSV 或 JSON）
+- `POST /admin/import/customers`（email 去重 upsert，含地址+metadata）；商品用 Medusa 內建匯入
+- ✅ 驗證：匯出商品/顧客、匯入顧客（建立+更新冪等）
+
+### 點數錢包 + AI 工作室（#2/#4 後端）
+- `credits` 模組：錢包 + 交易紀錄 + 原子扣/加點（餘額不足擋下、失敗自動退點）
+- `ai-studio` 模組：AI 任務 + 素材庫 + provider 抽象
+- **自動去背 = Photoroom**：✅ 端到端驗證（去背→上傳檔案模組→回傳 `/static` 透明 PNG 網址）
+- **自動生圖 = FLUX.1 dev (fal)**：程式接好、金鑰有效；⚠️ **等 fal 帳戶儲值**（fal.ai/dashboard/billing）
+- store API：`/store/ai/jobs`（扣點→生成→存素材，需會員登入）
+
+### 管理員帳號
+- `snow@bardshoptw.com` / `42828690`（你的）｜`admin@store.local` / `Admin12345!`（初始）
 
 ### 文件
 - `docs/shopline-feature-parity.md`：Shopline 15 模組 + Shopify 對標 + 設計哲學 + backlog
 - `docs/PROGRESS.md`：本檔
 
 ## 🟡 進行中 / 等你提供
-- **#3 Google/LINE 登入** → 等 OAuth 憑證（清單見對話）
+- **自動生圖 FLUX** → 等你到 fal.ai/dashboard/billing **儲值**（去背已可用）
+- **#3 Google 登入** → 後端✅；等你在 Google Console 註冊 redirect URI + 加測試使用者才能實際登入；**LINE** 等憑證
 - **#1 電子發票** → 等綠界/藍新測試金鑰 + 統編
+- **#16 Shopline 資料遷移** → 等你提供 Shopline CSV 樣本（商品/顧客/訂單）
+- **#19 前台 AI 工作室頁** → 後端就緒，前台操作頁待做
 - **#4 表單視覺化編輯器**（目前表單用 API/種子建立）
 
 ## ⬜ Backlog（已記，未開始）
