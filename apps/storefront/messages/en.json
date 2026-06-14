@@ -44,12 +44,31 @@
     "collections": "Collections"
   },
   "Account": {
+    "account": "Account",
     "hello": "Hello {name}",
+    "overview": "Overview",
     "profile": "Profile",
     "addresses": "Addresses",
     "orders": "Orders",
+    "logout": "Log out",
     "recentOrders": "Recent orders",
-    "noRecentOrders": "No recent orders"
+    "noRecentOrders": "No recent orders",
+    "nothingToSee": "Nothing to see here",
+    "noOrdersYet": "You don't have any orders yet, let us change that :)",
+    "continueShopping": "Continue shopping",
+    "datePlaced": "Date placed",
+    "orderNumber": "Order number",
+    "totalAmount": "Total amount",
+    "welcomeBack": "Welcome back",
+    "email": "Email",
+    "password": "Password",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "phone": "Phone",
+    "signIn": "Sign in",
+    "createAccount": "Create account",
+    "gotQuestions": "Got questions?",
+    "customerService": "Customer Service"
   },
   "Checkout": {
     "delivery": "Delivery",

@@ -44,12 +44,31 @@
     "collections": "컬렉션"
   },
   "Account": {
+    "account": "계정",
     "hello": "안녕하세요, {name}님",
+    "overview": "개요",
     "profile": "프로필",
     "addresses": "주소",
     "orders": "주문",
+    "logout": "로그아웃",
     "recentOrders": "최근 주문",
-    "noRecentOrders": "최근 주문이 없습니다"
+    "noRecentOrders": "최근 주문이 없습니다",
+    "nothingToSee": "표시할 내용이 없습니다",
+    "noOrdersYet": "아직 주문이 없습니다. 지금 둘러보세요 :)",
+    "continueShopping": "쇼핑 계속하기",
+    "datePlaced": "주문일",
+    "orderNumber": "주문 번호",
+    "totalAmount": "총 금액",
+    "welcomeBack": "다시 오신 것을 환영합니다",
+    "email": "이메일",
+    "password": "비밀번호",
+    "firstName": "이름",
+    "lastName": "성",
+    "phone": "전화번호",
+    "signIn": "로그인",
+    "createAccount": "회원가입",
+    "gotQuestions": "문의사항이 있으신가요?",
+    "customerService": "고객 서비스"
   },
   "Checkout": {
     "delivery": "배송",

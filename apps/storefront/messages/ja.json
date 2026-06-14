@@ -44,12 +44,31 @@
     "collections": "コレクション"
   },
   "Account": {
+    "account": "アカウント",
     "hello": "こんにちは、{name}さん",
+    "overview": "概要",
     "profile": "プロフィール",
     "addresses": "住所",
     "orders": "注文",
+    "logout": "ログアウト",
     "recentOrders": "最近の注文",
-    "noRecentOrders": "最近の注文はありません"
+    "noRecentOrders": "最近の注文はありません",
+    "nothingToSee": "まだ何もありません",
+    "noOrdersYet": "まだ注文がありません。さっそく見てみましょう :)",
+    "continueShopping": "買い物を続ける",
+    "datePlaced": "注文日",
+    "orderNumber": "注文番号",
+    "totalAmount": "合計金額",
+    "welcomeBack": "おかえりなさい",
+    "email": "メールアドレス",
+    "password": "パスワード",
+    "firstName": "名",
+    "lastName": "姓",
+    "phone": "電話番号",
+    "signIn": "ログイン",
+    "createAccount": "アカウント作成",
+    "gotQuestions": "ご不明な点は？",
+    "customerService": "カスタマーサービス"
   },
   "Checkout": {
     "delivery": "配送",
