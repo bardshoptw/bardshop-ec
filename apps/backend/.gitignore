@@ -24,3 +24,6 @@ build
 !.yarn/versions
 
 .medusa
+
+# Local file-module uploads (AI outputs etc.) — runtime artifacts
+/static
